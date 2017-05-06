@@ -1,3 +1,32 @@
+function c=singu0(x,a)
+    c=x>=a;
+endfunction
+
+function c=singu1(x,a)
+    c=(x-a).*(x>=a);
+endfunction
+
+function c=singu2(x,a)
+    c=((x-a).^2).*(x>=a);
+endfunction
+
+function dibujar()
+    subplot(2,1,1)
+    plot2d(x,Vx);
+    a=gca(); // Handle on axes entity
+    a.x_location = "origin";
+    a.y_location = "origin";
+    e = gce();
+    e.children.thickness = 3;
+    subplot(2,1,2)
+    plot(x,Mx);
+    a=gca(); // Handle on axes entity
+    a.x_location = "origin";
+    a.y_location = "origin";
+    e = gce();
+    e.children.thickness = 3;
+endfunction
+
 L=10;
 x=0:0.001:L;
 F=(91/3)*10^3;
@@ -28,32 +57,3 @@ Mr=x0(4,1);
 
 Vx=Fa*singu0(x,0)-F*singu0(x,M)+Fc*singu0(x,S)-W*singu1(x,S)+W*singu1(x,L)+Fd*singu0(x,L);
 Mx=Fa*singu1(x,0)-F*singu1(x,M)+Fc*singu1(x,S)-(W/2)*singu2(x,S)+(W/2)*singu2(x,L)+Fd*singu1(x,L)-Mr*singu0(x,0)+F*singu0(x,M);
-
-function c=singu0(x,a)
-    c=x>=a;
-endfunction
-
-function c=singu1(x,a)
-    c=(x-a).*(x>=a);
-endfunction
-
-function c=singu2(x,a)
-    c=((x-a).^2).*(x>=a);
-endfunction
-
-function dibujar()
-    subplot(2,1,1)
-    plot2d(x,Vx);
-    a=gca(); // Handle on axes entity
-    a.x_location = "origin";
-    a.y_location = "origin";
-    e = gce();
-    e.children.thickness = 3;
-    subplot(2,1,2)
-    plot(x,Mx);
-    a=gca(); // Handle on axes entity
-    a.x_location = "origin";
-    a.y_location = "origin";
-    e = gce();
-    e.children.thickness = 3;
-endfunction

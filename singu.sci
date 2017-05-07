@@ -10,6 +10,14 @@ function c=singu2(x,a)
     c=((x-a).^2).*(x>=a);
 endfunction
 
+function c=singu3(x,a)
+    c=((x-a).^3).*(x>=a);
+endfunction
+
+function c=singu4(x,a)
+    c=((x-a).^4).*(x>=a);
+endfunction
+
 function dibujar()
     subplot(2,1,1)
     plot2d(x,Vx);
@@ -18,6 +26,8 @@ function dibujar()
     a.y_location = "origin";
     e = gce();
     e.children.thickness = 3;
+    p=e.children(1);
+    t=datatipCreate(p,5);
     subplot(2,1,2)
     plot(x,Mx);
     a=gca(); // Handle on axes entity
@@ -28,7 +38,6 @@ function dibujar()
 endfunction
 
 L=10;
-x=0:0.001:L;
 F=(91/3)*10^3;
 W=24375;
 M=2.75;
@@ -37,6 +46,8 @@ I=462*10^-6;
 E=200*10^9;
 K1=1*10^6;
 K2=1*10^6;
+
+x=0:0.001:L;
 
 A=[1,1,1,0;
    0,S,L,1;
@@ -57,3 +68,7 @@ Mr=x0(4,1);
 
 Vx=Fa*singu0(x,0)-F*singu0(x,M)+Fc*singu0(x,S)-W*singu1(x,S)+W*singu1(x,L)+Fd*singu0(x,L);
 Mx=Fa*singu1(x,0)-F*singu1(x,M)+Fc*singu1(x,S)-(W/2)*singu2(x,S)+(W/2)*singu2(x,L)+Fd*singu1(x,L)-Mr*singu0(x,0)+F*singu0(x,M);
+
+theta=((Fa/2)*singu2(x,0)-(F/2)*singu2(x,M)+(Fc/2)*singu2(x,S)-(W/6)*singu3(x,S)+(W/6)*singu3(x,L)+(Fd/2)*singu2(x,L)-Mr*singu1(x,0)+F*singu1(x,M))/(E*I);
+
+y=((Fa/6)*singu3(x,0)-(F/6)*singu3(x,M)+(Fc/6)*singu3(x,S)-(W/24)*singu4(x,S)+(W/24)*singu4(x,L)+(Fd/6)*singu3(x,L)-(Mr/2)*singu2(x,0)+(F/2)*singu2(x,M))/(E*I);

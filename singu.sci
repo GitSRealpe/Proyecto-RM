@@ -26,8 +26,9 @@ function dibujar()
     a.y_location = "origin";
     e = gce();
     e.children.thickness = 3;
-    //p=e.children(1);
-    //t=datatipCreate(p,5);
+    xtitle("Fuerza cortante");
+    xlabel("x")
+    ylabel("V(x)")
     subplot(2,2,3)
     plot(x,Mx);
     a=gca(); // Handle on axes entity
@@ -35,6 +36,12 @@ function dibujar()
     a.y_location = "origin";
     e = gce();
     e.children.thickness = 3;
+    p=e.children(1);
+    [m,k]=max(Mx)
+    t=datatipCreate(p,k);
+    xtitle("Momento flector");
+    xlabel("x");
+    ylabel("M(x)")
     subplot(2,2,2);
     plot(x,theta);
     a=gca(); // Handle on axes entity
@@ -42,6 +49,9 @@ function dibujar()
     a.y_location = "origin";
     e = gce();
     e.children.thickness = 3;
+    xtitle("Angulo de pendiente");
+    xlabel("x");
+    ylabel("Theta(x)")
     subplot(2,2,4);
     plot(x,y);
     a=gca(); // Handle on axes entity
@@ -49,8 +59,12 @@ function dibujar()
     a.y_location = "origin";
     e = gce();
     e.children.thickness = 3;
+    xtitle("Deflexion");
+    xlabel("x");
+    ylabel("y(x)")
 endfunction
 
+//PARAMETROS DE ENTRADA
 L=10;
 F=(91/3)*10^3;
 W=24375;
@@ -62,6 +76,7 @@ K1=1*10^6;
 K2=1*10^6;
 d=420*10^(-3);
 sadm=145*10^6;
+//PARAMETROS DE ENTRADA
 
 if K1==0 then
     K1=1;

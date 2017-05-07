@@ -131,6 +131,14 @@ mprintf('\n Para las variables de entrada el analisis resultante es el siguiente
 mprintf('\n')
 mprintf('\n Las reacciones en los apoyos son: \n Fa=%1.3f kN \n Fc=%1.3f kN \n Fd=%1.3f kN \n Mr=%1.3f kN*m',Fa/1000,Fc/1000,Fd/1000,Mr/1000)
 
+if sigma>sadm then
+    mprintf('\n')
+    mprintf('\n ¡ALERTA!')
+    mprintf('\n Se ha sobrepasado el esfuerzo normal admisible en la viga')
+    mprintf('\n Esfuerzo admisible [Õ]=%1.3f MPa',sadm/1000000)
+    mprintf('\n Esfuerzo maximo en la viga Õ=%1.3f MPa',sigma/1000000)
+end
+
 mprintf('\n')
 mprintf('\n Angulo de pendiente en el punto B=%1.2f metros es Theta=%f radianes',M,resp(1,1))
 mprintf('\n Angulo de pendiente en el punto C=%1.2f metros es Theta=%f radianes',S,resp(1,2))

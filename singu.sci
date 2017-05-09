@@ -71,11 +71,20 @@ F=(91/3)*10^3;      //Newtons
 W=24375;            //Newtons por metro
 M=2.75;             //metros
 S=3.8;              //metros
-I=462*10^-6;        //metros^4
+    //Parametros de sección especificos
+    tf=19.3*10^(-3);
+    bf=261*10^(-3);
+    d=420*10^(-3);
+    tw=11.6*10^(-3);
+//    centroide=(tf/2*tf*bf+(d-tf/2)*tf*bf+(((d-2*tf)/2)+tf)*(d-2*tf)*tw)/(2*tf*bf+(d-2*tf)*tw) //desde la base
+//    cmax=[d-centroide,centroide]
+//    cmax=max(cmax);
+    I=2*((1/12*bf*tf^3)+bf*tf*(d/2-tf/2)^2)+(1/12*tw*(d-2*tf)^3)
+    //Parametros de sección especificos
+//I=462*10^-6;        //metros^4
 E=200*10^9;         //Pascales
-K1=%inf;          //Newtons/metro
-K2=%inf;          //Newtons/metro     %inf
-d=420*10^(-3);      //metros
+K1=1*10^6;          //Newtons/metro     %inf para valor infinito
+K2=1*10^6;          //Newtons/metro     %inf para valor infinito
 sadm=250*10^6;      //Pascales
 //PARAMETROS DE ENTRADA
 

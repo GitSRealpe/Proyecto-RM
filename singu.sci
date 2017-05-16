@@ -1,5 +1,6 @@
 clear
 close();
+//funciones de singularidad
 function c=singu0(x,a)
     c=x>=a;
 endfunction
@@ -19,6 +20,7 @@ endfunction
 function c=singu4(x,a)
     c=((x-a).^4).*(x>=a);
 endfunction
+//funciones de singularidad
 
 function dibujar()
     subplot(2,2,1)
@@ -29,8 +31,8 @@ function dibujar()
     e = gce();
     e.children.thickness = 3;
     xtitle("Fuerza cortante");
-    xlabel("x")
-    ylabel("V(x)")
+    xlabel("x (m)")
+    ylabel("V(x) (N)")
     t=a.title;
     t.foreground=9;
     t.font_size=4;
@@ -47,10 +49,10 @@ function dibujar()
     e.children.thickness = 3;
     p=e.children(1);
     [m,k]=max(abs(Mx))
-    t=datatipCreate(p,k);
+    //t=datatipCreate(p,k);
     xtitle("Momento flector");
-    xlabel("x");
-    ylabel("M(x)")
+    xlabel("x (m)");
+    ylabel("M(x) (N*m)")
     t=a.title;
     t.foreground=9;
     t.font_size=4;
@@ -66,8 +68,8 @@ function dibujar()
     e = gce();
     e.children.thickness = 3;
     xtitle("Angulo de pendiente");
-    xlabel("x");
-    ylabel("Theta(x)")
+    xlabel("x (m)");
+    ylabel("Theta(x) (grados)")
     subplot(2,2,4);
     t=a.title;
     t.foreground=9;
@@ -76,15 +78,15 @@ function dibujar()
     t=a.y_label;
     t.font_size=3;
     //deflexion
-    plot(x,y);
+    plot(x,y*1000);
     a=gca(); // Handle on axes entity
     a.x_location = "origin";
     a.y_location = "origin";
     e = gce();
     e.children.thickness = 3;
     xtitle("Deflexion");
-    xlabel("x");
-    ylabel("y(x)")
+    xlabel("x (m)");
+    ylabel("y(x) (mm)")
     t=a.title;
     t.foreground=9;
     t.font_size=4;
@@ -100,16 +102,16 @@ W=24375;            //Newtons por metro
 M=2.75;             //metros
 S=3.8;              //metros
     //Parametros de sección especificos
-    tf=19.3*10^(-3);
-    bf=261*10^(-3);
+//    tf=19.3*10^(-3);
+//    bf=261*10^(-3);
     d=420*10^(-3);
-    tw=11.6*10^(-3);
-    I=2*((1/12*bf*tf^3)+bf*tf*(d/2-tf/2)^2)+(1/12*tw*(d-2*tf)^3)
+//    tw=11.6*10^(-3);
+//    I=2*((1/12*bf*tf^3)+bf*tf*(d/2-tf/2)^2)+(1/12*tw*(d-2*tf)^3)
     //Parametros de sección especificos
-//I=462*10^-6;        //metros^4
+I=462*10^-6;        //metros^4
 E=200*10^9;         //Pascales
-K1=0;          //Newtons/metro     %inf para valor infinito
-K2=0;          //Newtons/metro     %inf para valor infinito
+K1=1*10^6;          //Newtons/metro     %inf para valor infinito
+K2=1*10^6;          //Newtons/metro     %inf para valor infinito
 sadm=250*10^6;      //Pascales
 thetadm=3;          //grados
 yadm=10*10^(-3);    //milimetros
@@ -219,8 +221,8 @@ mprintf('\n')
 mprintf('\n Deflexión en el punto B=%1.2f metros es y=%1.3f mm',M,(resp(2,1)*1000))
 mprintf('\n Deflexión en el punto C=%1.2f metros es y=%1.3f mm',S,(resp(2,2)*1000))
 mprintf('\n Deflexión en el punto D=%1.2f metros es y=%1.3f mm',L,(resp(2,3)*1000))
-
+[Mmax,k]=max(abs(Mx));
 mprintf('\n')
-mprintf('\n Con un momento máximo de M=%1.3f kN*m y con la caracteristicas \n de la seccion de la viga se presenta un esfuerzo \n normal maximo de Õ=%1.3f MPa',max(abs(Mx))/1000,sigmax/1000000 )
+mprintf('\n Con un momento máximo de M=%1.3f kN*m, presente en x=%1.3f m, \n y con la caracteristicas de la seccion de la viga se presenta un esfuerzo \n normal maximo de Õ=%1.3f MPa en ese punto',Mmax/1000,(k-1)*0.001,sigmax/1000000 )
 mprintf('\n De esta manera la viga presenta un factor de seguridad Fs=%1.3f',Fs)
  dibujar;
